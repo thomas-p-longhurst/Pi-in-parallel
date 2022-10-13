@@ -6,29 +6,31 @@ public class TaskQueue {
     // To prevent race conditions, use synchronized(this) {}
 
     private final LinkedList<Task> q = new LinkedList<>();
+    private int tasksDone = 0;
     public TaskQueue(int initialLength) {
-        Bpp bpp = new Bpp();
         ArrayList<Task> preShuffle = new ArrayList<>();
         for (int i = 1; i <= initialLength; i++) {
-            preShuffle.add(new Task(bpp, i));
+            preShuffle.add(new Task(i));
         }
         Collections.shuffle(preShuffle);
         q.addAll(preShuffle);
     }
 
-    public boolean isEmpty() {
-        synchronized (this) {
-            return q.isEmpty();
-        }
+    public synchronized boolean isEmpty() {
+        return q.isEmpty();
     }
 
-    public int getLength() {
+    public synchronized int getLength() {
         return q.size();
     }
 
-    public Task getTask() {
-        synchronized (this) {
-            return q.removeFirst();
+    public synchronized Task getTask() {
+        tasksDone += 1;
+        if (tasksDone >= 10) {
+            tasksDone = 0;
+            System.out.print(".");
+            System.out.flush();
         }
+        return q.removeFirst();
     }
 }
