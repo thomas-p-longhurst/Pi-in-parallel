@@ -3,8 +3,6 @@ import java.util.Collections;
 import java.util.LinkedList;
 
 public class TaskQueue {
-    // To prevent race conditions, use synchronized(this) {}
-
     private final LinkedList<Task> q = new LinkedList<>();
     private int tasksDone = 0;
     public TaskQueue(int initialLength) {

@@ -39,7 +39,7 @@ public class Assn4 {
         System.out.print("3.");
         values.forEach(System.out::print);
         System.out.println();
-        System.out.printf("Pi computation took %d ms", timeTaken);
+        System.out.printf("Pi computation took %d ms with %d processors", timeTaken, availableCores);
     }
 
     // Just so I can test how much faster the program will get with multi-threading
