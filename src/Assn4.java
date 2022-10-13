@@ -1,3 +1,5 @@
+import java.util.Collection;
+
 /**
  * Compute the digits of Pi in parallel. Utilize all available cores of any computer, each core computing a single
  * digit. Compute the first 1000 digits of Pi.
@@ -8,14 +10,19 @@ public class Assn4 {
     }
 
     // Just so I can test how much faster the program will get with multi-threading
-    // Takes about 30 seconds
+    // Takes about 30 seconds to calculate 1000 digits
     public static void calculateSingleThread() {
-        int digits = 1000;
+        int digits = 100;
         TaskQueue tq = new TaskQueue(digits);
-        System.out.print("3.");
+        ResultTable rt = new ResultTable();
+
         while (!tq.isEmpty()) {
             Task task = tq.getTask();
-            System.out.print(task.calculate());
+            rt.setDigit(task.getTarget(), task.calculate());
         }
+
+        Collection<Integer> values = rt.getValues();
+        System.out.print("3.");
+        values.forEach(System.out::print);
     }
 }
