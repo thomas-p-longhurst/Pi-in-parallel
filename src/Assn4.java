@@ -10,13 +10,12 @@ public class Assn4 {
     // Just so I can test how much faster the program will get with multi-threading
     // Takes about 30 seconds
     public static void calculateSingleThread() {
-        Bpp bpp = new Bpp();
+        int digits = 1000;
+        TaskQueue tq = new TaskQueue(digits);
         System.out.print("3.");
-        for (int i = 1; i < 1000; i++) {
-            // Pretty inefficient to calculate 8 digits and only take the first one, but I really don't want to dissect the code from github
-            int eightDecimals = bpp.getDecimal(i);
-            int firstDigit = Integer.parseInt(Integer.toString(eightDecimals).substring(0, 1));
-            System.out.printf("%d", firstDigit);
+        while (!tq.isEmpty()) {
+            Task task = tq.getTask();
+            System.out.print(task.calculate());
         }
     }
 }
