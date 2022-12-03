@@ -1,0 +1,2 @@
+# Pi-in-parallel
+This assignment was for CS 3100: Operating Systems and Concurrency. The task was to compute 1,000 digits of Pi in parallel, utilizing all cores of a computer. Each core works on a task to compute a single digit of the fractional part of Pi, while sharing a common data structure from which to obtain the tasks and another shared data structure into which the results should be placed, all while protecting against race conditions.
